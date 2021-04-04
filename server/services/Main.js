@@ -4,12 +4,27 @@ class MainAPI extends RESTDataSource {
 
     constructor() {
         super();
-        this.baseURL = ""
+        this.baseURL = "https://swapi.dev/api/"
     }
 
-    async getFilms(value) {
-        return this.get(value)
+    async getData(v, type) {
+        return this.get(`${type}/${v}`)
     }
+
+    async getAllData(type) {
+        return this.get(type);
+    }
+
+    async getHomeWorld(v) {
+        this.baseURL = "";
+        return this.get(v);
+    }
+
+    async getSomeData(v) {
+        this.baseURL = "";
+        return this.get(v);
+    }
+
 }
 
 module.exports = MainAPI;
