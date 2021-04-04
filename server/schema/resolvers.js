@@ -40,49 +40,41 @@ const resolvers = {
         },
 
     },
+
     People: {
-        films: ({ films }, __, { dataSources }) => {
-            const res = films.map(async (v) => {
-                const reslt = await dataSources.mainAPI.getSomeData(v);
-                return reslt;
-            })
-            return Promise.all(res);
+        films: ({ films }, __, { dataSources }) => fetchData(films, dataSources),
+        vehicles: ({ vehicles }, __, { dataSources }) => fetchData(vehicles, dataSources),
+        species: ({ species }, __, { dataSources }) => fetchData(species, dataSources),
+        starships: ({ starships }, __, { dataSources }) => fetchData(starships, dataSources),
+        homeworld: async ({ homeworld }, __, { dataSources }) => {
+            return dataSources.mainAPI.getHomeWorld(homeworld)
         }
     },
-    // People: {
-    //     films: ({ films }) => fetchData(films),
-    //     vehicles: ({ vehicles }) => fetchData(vehicles),
-    //     species: ({ species }) => fetchData(species),
-    //     starships: ({ starships }) => fetchData(starships),
-    //     homeworld: async ({ homeworld }, __, { dataSources }) => {
-    //         return dataSources.mainAPI.getHomeWorld(homeworld)
-    //     }
-    // },
     Film: {
-        species: ({ species }) => fetchData(species),
-        starships: ({ starships }) => fetchData(starships),
-        vehicles: ({ vehicles }) => fetchData(vehicles),
-        charachters: ({ charachters }) => fetchData(charachters),
-        planets: ({ planets }) => fetchData(planets),
+        species: ({ species }, __, { dataSources }) => fetchData(species, dataSources),
+        starships: ({ starships }, __, { dataSources }) => fetchData(starships, dataSources),
+        vehicles: ({ vehicles }, __, { dataSources }) => fetchData(vehicles, dataSources),
+        charachters: ({ charachters }, __, { dataSources }) => fetchData(charachters, dataSources),
+        planets: ({ planets }, __, { dataSources }) => fetchData(planets, dataSources),
     },
     Species: {
         homeworld: async ({ homeworld }, __, { dataSources }) => {
             return dataSources.mainAPI.getHomeWorld(homeworld)
         },
-        people: ({ people }) => fetchData(people),
-        films: ({ films }) => fetchData(films),
+        people: ({ people }, __, { dataSources }) => fetchData(people, dataSources),
+        films: ({ films }, __, { dataSources }) => fetchData(films, dataSources),
     },
     Vehicle: {
-        films: ({ films }) => fetchData(films),
-        pilots: ({ pilots }) => fetchData(pilots),
+        films: ({ films }, __, { dataSources }) => fetchData(films, dataSources),
+        pilots: ({ pilots }, __, { dataSources }) => fetchData(pilots, dataSources),
     },
     Starships: {
-        films: ({ films }) => fetchData(films),
-        pilots: ({ pilots }) => fetchData(pilots),
+        films: ({ films }, __, { dataSources }) => fetchData(films, dataSources),
+        pilots: ({ pilots }, __, { dataSources }) => fetchData(pilots, dataSources),
     },
     Planet: {
-        films: ({ films }) => fetchData(films),
-        residents: ({ residents }) => fetchData(residents),
+        films: ({ films }, __, { dataSources }) => fetchData(films, dataSources),
+        residents: ({ residents }, __, { dataSources }) => fetchData(residents, dataSources),
     }
 
 }

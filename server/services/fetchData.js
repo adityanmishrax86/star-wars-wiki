@@ -1,9 +1,7 @@
-const fetch = require('node-fetch');
-
-const fetchData = _ => {
+const fetchData = (_, dataSources) => {
     const promises = _.map(async (v) => {
-        const res = await fetch(v)
-        return res.json();
+        const res = await dataSources.mainAPI.getSomeData(v)
+        return res;
     })
     return Promise.all(promises)
 }
